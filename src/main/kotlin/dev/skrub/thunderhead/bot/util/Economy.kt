@@ -2,20 +2,18 @@ package dev.skrub.thunderhead.bot.util
 
 import java.sql.Connection
 import java.sql.DriverManager
-import java.sql.ResultSet
 import java.sql.Statement
 import java.time.Instant
-import java.time.LocalDateTime
 import java.util.*
 
 object Economy {
-    val database = "jdbc:sqlite:economy.db"
-    val DEFAULT_BALANCE = 100
-    val DAILY_LOW = 10
-    val DAILY_HIGH = 22
+    const val DATABASE = "jdbc:sqlite:economy.db"
+    const val DEFAULT_BALANCE = 100
+    const val DAILY_LOW = 10
+    const val DAILY_HIGH = 22
 
     fun verify() {
-        val connection: Connection = DriverManager.getConnection(database)
+        val connection: Connection = DriverManager.getConnection(DATABASE)
         val statement: Statement = connection.createStatement()
         statement.queryTimeout = 30
         statement.execute("CREATE TABLE IF NOT EXISTS Economy(id VARCHAR(32) UNIQUE, balance INTEGER, daily DATETIME, work DATETIME, created DATETIME, updated DATETIME)")

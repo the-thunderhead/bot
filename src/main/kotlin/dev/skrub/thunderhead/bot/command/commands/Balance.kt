@@ -25,7 +25,7 @@ class Balance : Command(
 ) {
     override fun execute(event: GenericCommandInteractionEvent) {
         val user = event.getOption<User>("user") ?: event.user
-        val connection: Connection = DriverManager.getConnection(Economy.database)
+        val connection: Connection = DriverManager.getConnection(Economy.DATABASE)
         val statement: Statement = connection.createStatement()
         statement.queryTimeout = 30
         val balance = Economy.getBalance(user.id, statement)

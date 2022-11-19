@@ -24,7 +24,7 @@ class Daily : Command(
     type = Type.NORMAL
 ) {
     override fun execute(event: GenericCommandInteractionEvent) {
-        val connection: Connection = DriverManager.getConnection(Economy.database)
+        val connection: Connection = DriverManager.getConnection(Economy.DATABASE)
         val statement: Statement = connection.createStatement()
         statement.queryTimeout = 30
         val daily = Economy.daily(event.user.id, statement)

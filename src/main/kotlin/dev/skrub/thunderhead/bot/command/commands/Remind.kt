@@ -4,10 +4,14 @@ import dev.minn.jda.ktx.interactions.commands.option
 import dev.minn.jda.ktx.interactions.components.getOption
 import dev.skrub.thunderhead.bot.command.Command
 import dev.skrub.thunderhead.bot.command.Type
+import dev.skrub.thunderhead.bot.util.Economy
+import dev.skrub.thunderhead.bot.util.Reminders
 import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData
-import java.util.concurrent.TimeUnit
+import java.sql.Connection
+import java.sql.DriverManager
+import java.sql.Statement
 
 class Remind : Command(
     name = "remind",
@@ -19,7 +23,7 @@ class Remind : Command(
         val time = event.getOption<String>("time")!!
         val reminder = event.getOption<String>("reminder")!!
 
-        if (!time.matches(Regex("/[s,m,h,d,w,y]\$/g"))) {
+        if (Regex("^(\\d+)[s,m,h,d,w,y]\$").matches(time)) {
             val unit = when(time.last()) {
                 's' -> 1
                 'm' -> 60
@@ -29,13 +33,16 @@ class Remind : Command(
                 'y' -> 31557600
                 else -> 0
             }
-            val scheduledFor = unit * ("0${time.filter { it.isDigit() }}").toInt()
 
             // DEBUG
             // val ms = 1000L*scheduledFor
             // val remaining = String.format("%d:%02d", TimeUnit.MILLISECONDS.toHours(ms), TimeUnit.MILLISECONDS.toMinutes(ms) % TimeUnit.HOURS.toMinutes(1))
-
-
+            val connection: Connection = DriverManager.getConnection(Economy.DATABASE)
+            val statement: Statement = connection.createStatement()
+            statement.queryTimeout = 30
+            Reminders.addReminder(event.user.id, unit * ("0${time.filter { it.isDigit() }}").toInt() * 1000L, reminder, statement)
+            event.reply("I will be sure to remind you of that").queue()
+            statement.close()
         } else {
             event.reply("Please specify a valid time, e.g., 3m, 5h.").queue()
         }
