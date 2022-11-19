@@ -12,20 +12,21 @@ import dev.skrub.thunderhead.bot.util.Reminders
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.requests.GatewayIntent
 import org.reflections.Reflections
-import redempt.crunch.Crunch
+import java.util.Timer
+import kotlin.concurrent.timerTask
 
 fun main() {
     val jda = light(System.getenv("TOKEN")!!, enableCoroutines = true) {
         intents += listOf(GatewayIntent.GUILD_MEMBERS)
     }
-    Economy.verify()
-    Reminders.verify()
+    Economy.setup()
     registerCommands(jda)
     jda.awaitReady()
+    Reminders.setup(jda)
     println("Ready!")
 }
 
-private fun registerCommands(jda: JDA)  {
+private fun registerCommands(jda: JDA) {
     val reflections = Reflections("dev.skrub.thunderhead.bot.command.commands")
     jda.updateCommands {
         for (command in reflections.getSubTypesOf(Command::class.java)) {
@@ -34,7 +35,7 @@ private fun registerCommands(jda: JDA)  {
                 this.restrict(instance.restrictions.first, instance.restrictions.second)
                 instance.addOptions(this)
             }
-            jda.onCommand(instance.name) {event -> instance.execute(event)}
+            jda.onCommand(instance.name) { event -> instance.execute(event) }
         }
     }.queue()
 }

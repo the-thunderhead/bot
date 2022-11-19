@@ -33,16 +33,12 @@ class Remind : Command(
                 'y' -> 31557600
                 else -> 0
             }
-
-            // DEBUG
-            // val ms = 1000L*scheduledFor
-            // val remaining = String.format("%d:%02d", TimeUnit.MILLISECONDS.toHours(ms), TimeUnit.MILLISECONDS.toMinutes(ms) % TimeUnit.HOURS.toMinutes(1))
-            val connection: Connection = DriverManager.getConnection(Economy.DATABASE)
+            val connection: Connection = DriverManager.getConnection(Reminders.DATABASE)
             val statement: Statement = connection.createStatement()
             statement.queryTimeout = 30
             Reminders.addReminder(event.user.id, unit * ("0${time.filter { it.isDigit() }}").toInt() * 1000L, reminder, statement)
             event.reply("I will be sure to remind you of that").queue()
-            statement.close()
+            connection.close()
         } else {
             event.reply("Please specify a valid time, e.g., 3m, 5h.").queue()
         }

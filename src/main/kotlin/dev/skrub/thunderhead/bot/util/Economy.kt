@@ -12,7 +12,7 @@ object Economy {
     const val DAILY_LOW = 10
     const val DAILY_HIGH = 22
 
-    fun verify() {
+    fun setup() {
         val connection: Connection = DriverManager.getConnection(DATABASE)
         val statement: Statement = connection.createStatement()
         statement.queryTimeout = 30
