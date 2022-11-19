@@ -25,6 +25,7 @@ dependencies {
     }
     implementation("com.github.minndevelopment:jda-ktx:863470e")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+    implementation("org.json:json:20220924")
     implementation("org.reflections:reflections:0.10.2")
     implementation("com.github.Redempt:Crunch:1.1.2")
     implementation("org.xerial:sqlite-jdbc:3.39.4.0")

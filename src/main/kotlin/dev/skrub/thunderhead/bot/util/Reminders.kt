@@ -16,17 +16,19 @@ object Reminders {
     const val DATABASE = "jdbc:sqlite:reminders.db"
     const val CYCLE_LENGTH = 10000L // ten seconds
 
-    fun setup(jda: JDA) {
+    fun setup() {
         val connection: Connection = DriverManager.getConnection(DATABASE)
         val statement: Statement = connection.createStatement()
         statement.queryTimeout = 30
         statement.execute("CREATE TABLE IF NOT EXISTS Reminders(created DATETIME, scheduled DATETIME, id VARCHAR(32), reminder VARCHAR(5000))")
         connection.close()
+    }
 
+    fun startScheduler(jda: JDA) {
         Timer("ReminderScheduler").scheduleAtFixedRate(timerTask {
             val connection: Connection = DriverManager.getConnection(DATABASE)
             val statement: Statement = connection.createStatement()
-            statement.queryTimeout = (CYCLE_LENGTH / 2000).toInt() // ensure this does not go on longer than a full cycle length
+            statement.queryTimeout = (CYCLE_LENGTH / 2000).toInt() // make sure we are not waiting longer than half a cycle
             val now = Date.from(Instant.now()).time
             val result = statement.executeQuery("SELECT created, scheduled, id, reminder FROM Reminders WHERE scheduled < ${now + CYCLE_LENGTH}")
             while (result.next()) {

@@ -20,9 +20,10 @@ fun main() {
         intents += listOf(GatewayIntent.GUILD_MEMBERS)
     }
     Economy.setup()
+    Reminders.setup()
     registerCommands(jda)
     jda.awaitReady()
-    Reminders.setup(jda)
+    Reminders.startScheduler(jda)
     println("Ready!")
 }
 

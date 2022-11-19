@@ -37,7 +37,7 @@ class Remind : Command(
             val statement: Statement = connection.createStatement()
             statement.queryTimeout = 30
             Reminders.addReminder(event.user.id, unit * ("0${time.filter { it.isDigit() }}").toInt() * 1000L, reminder, statement)
-            event.reply("I will be sure to remind you of that").queue()
+            event.reply("I will be sure to remind you of that.").queue()
             connection.close()
         } else {
             event.reply("Please specify a valid time, e.g., 3m, 5h.").queue()
