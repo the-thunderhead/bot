@@ -1,0 +1,19 @@
+# Thunderhead Specific Stuff
+*.db
+config.yaml
+
+# Some folders
+.gradle
+/build/
+.idea
+/out/
+
+# From https://github.com/github/gitignore/blob/master/Java.gitignore
+*.class
+
+# Ignore .jar files (But not gradle-wrapper.jar)
+*.jar
+!gradle-wrapper.jar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
