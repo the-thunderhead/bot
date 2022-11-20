@@ -24,9 +24,11 @@ class Time : Command(
     override fun execute(event: GenericCommandInteractionEvent) {
         val location = event.getOption<String>("location")!!
         try {
-            val response = JSONObject(Utils.request("https://geocoding-api.open-meteo.com/v1/search?name=${
-                location.replace(" ", "+").replace("&", "")
-            }&format=json"))
+            val response = JSONObject(
+                Utils.request("https://geocoding-api.open-meteo.com/v1/search?name=${
+                    location.replace(" ", "+").replace("&", "")
+                }")
+            )
 
             if (!response.has("results")) {
                 event.reply("I could not find the time in `$location`. Are you sure it exists?").queue()
