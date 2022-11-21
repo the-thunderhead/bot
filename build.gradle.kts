@@ -6,7 +6,7 @@ plugins {
 }
 
 application {
-    mainClass.set("dev.skrub.thunderhead.bot.Main")
+    mainClass.set("dev.skrub.thunderhead.bot.MainKt")
 }
 group = "dev.skrub.thunderhead"
 version = "1.0.0"
