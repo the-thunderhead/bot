@@ -6,7 +6,7 @@ plugins {
 }
 
 application {
-    mainClass.set("dev.skrub.thunderhead.bot.Main")
+    mainClass.set("dev.skrub.thunderhead.bot.MainKt")
 }
 group = "dev.skrub.thunderhead"
 version = "1.0.0"
@@ -37,5 +37,5 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.jvmTarget = "17"
 }
