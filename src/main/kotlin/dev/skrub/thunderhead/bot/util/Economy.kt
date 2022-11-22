@@ -1,5 +1,6 @@
 package dev.skrub.thunderhead.bot.util
 
+import okhttp3.internal.toImmutableList
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.Statement
@@ -40,6 +41,15 @@ object Economy {
         } else {
             setBalance(id, DEFAULT_BALANCE, statement)
         }
+    }
+
+    fun getLeaderboard(amount: Int, statement: Statement): List<Pair<String, Int>> {
+        val result = statement.executeQuery("SELECT id, balance FROM Economy ORDER BY balance DESC LIMIT $amount")
+        val values: MutableList<Pair<String, Int>> = mutableListOf()
+        while (result.next()) {
+         values.add(Pair(result.getString("id"), result.getInt("balance")))
+        }
+        return values.toImmutableList()
     }
 
     fun daily(id: String, statement: Statement): Int? {

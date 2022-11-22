@@ -21,7 +21,7 @@ class Daily : Command(
     name = "daily",
     description = "Your daily BIG (Basic Income Guarantee",
     restrictions = Pair(false, DefaultMemberPermissions.ENABLED),
-    type = Type.NORMAL
+    type = Type.ECONOMY
 ) {
     override fun execute(event: GenericCommandInteractionEvent) {
         val connection: Connection = DriverManager.getConnection(Economy.DATABASE)
