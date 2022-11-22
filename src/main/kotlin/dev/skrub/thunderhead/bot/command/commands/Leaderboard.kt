@@ -29,7 +29,7 @@ class Leaderboard : Command(
             embeds += Embed {
                 title = "Leaderboard"
                 description = leaderboard.indices.joinToString("\n") {
-                    "#$it ${leaderboard[it].first} - ${leaderboard[it].second} ${Emote.currency}"
+                    "**#${it+1}** ${leaderboard[it].first} - ${leaderboard[it].second} ${Emote.currency}"
                 }.ifEmpty { "`Error: No Users in Database`" }
                 color = Color.discord
             }

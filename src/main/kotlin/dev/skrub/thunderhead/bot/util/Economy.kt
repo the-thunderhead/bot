@@ -46,22 +46,15 @@ object Economy {
     }
 
     fun getLeaderboard(amount: Int, statement: Statement, jda: JDA): List<Pair<String, Int>> {
-        // TODO: FIXME: THIS LOL!!!!
-        try  {
-            val result = statement.executeQuery("SELECT id, balance FROM Economy ORDER BY balance DESC LIMIT $amount")
-            val values: MutableList<Pair<String, Int>> = mutableListOf()
-            while (result.next()) {
-                val id = result.getString("id")
-                val balance = result.getInt("balance")
-                val name = jda.retrieveUserById(id).queue{ it.name }
-                println(name)
-                values.add(Pair("!!!! RAGE", 100))
-            }
-            return values.toImmutableList()
-        } catch (e: Exception){
-            println(e)
-            return emptyList()
+        val result = statement.executeQuery("SELECT id, balance FROM Economy ORDER BY balance DESC LIMIT $amount")
+        val values: MutableList<Pair<String, Int>> = mutableListOf()
+        while (result.next()) {
+            values.add(Pair(
+                jda.retrieveUserById(result.getString("id")).complete().name,
+                result.getInt("balance")
+            ))
         }
+        return values.toImmutableList()
     }
 
     fun daily(id: String, statement: Statement): Int? {
