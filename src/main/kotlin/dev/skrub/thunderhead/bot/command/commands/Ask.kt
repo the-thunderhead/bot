@@ -32,13 +32,10 @@ class Ask : Command(
         try {
             val bufferedImage: BufferedImage = BufferedImage(600, 600, BufferedImage.TYPE_INT_RGB)
             val graphics2D: Graphics2D = bufferedImage.createGraphics()
-            val answer =
-                (round(Crunch.compileExpression(
-                    question
-                        .replace("x", "*")
-                        .replace("÷", "/")
-                        .replace("`", "")
-                ).evaluate()  * 1000) / 1000).toString().replace(Regex("\\.0\$"), "")
+            val answer = (round(
+                Crunch.compileExpression(question.replace("x", "*").replace("÷", "/").replace("`", ""))
+                    .evaluate() * 1000
+            ) / 1000).toString().replace(Regex("\\.0\$"), "")
 
             graphics2D.drawImage(
                 ImageIO.read(this::class.java.classLoader.getResourceAsStream("ask_background.png")),
@@ -46,9 +43,10 @@ class Ask : Command(
                 0,
                 null
             )
-            graphics2D.font = Font
-                .createFont(Font.TRUETYPE_FONT, this::class.java.classLoader.getResourceAsStream("Overpass-SemiBold.ttf"))
-                .deriveFont(80f)
+            graphics2D.font = Font.createFont(
+                Font.TRUETYPE_FONT,
+                this::class.java.classLoader.getResourceAsStream("Overpass-SemiBold.ttf")
+            ).deriveFont(80f)
             graphics2D.color = Color(243, 240, 205)
             graphics2D.drawString(answer, 300 - (graphics2D.fontMetrics.stringWidth(answer) / 2), 300)
             graphics2D.dispose()
@@ -63,13 +61,36 @@ class Ask : Command(
 
         } catch (e: Exception) {
             val answer = if (question.contains("scythe")) "warning" else listOf(
-                "yes-986", "yes-never", "yes-truly", "yes-would", "yes-safely",
-                "yes-analysis", "yes-yes", "no-some", "no-no", "no-better",
-                "no-inquiry", "no-reconsider", "no-although", "no-history-2",
-                "maybe-care", "maybe-definite", "maybe-exact", "maybe-balanced",
-                "maybe-best", "maybe-maybe", "maybe-427", "non-offend", "non-apologies",
-                "non-hmm", "non-quaint", "non-nevermind", "non-scythes", "non-difficult",
-                "non-especially", "non-belies"
+                "yes-986",
+                "yes-never",
+                "yes-truly",
+                "yes-would",
+                "yes-safely",
+                "yes-analysis",
+                "yes-yes",
+                "no-some",
+                "no-no",
+                "no-better",
+                "no-inquiry",
+                "no-reconsider",
+                "no-although",
+                "no-history-2",
+                "maybe-care",
+                "maybe-definite",
+                "maybe-exact",
+                "maybe-balanced",
+                "maybe-best",
+                "maybe-maybe",
+                "maybe-427",
+                "non-offend",
+                "non-apologies",
+                "non-hmm",
+                "non-quaint",
+                "non-nevermind",
+                "non-scythes",
+                "non-difficult",
+                "non-especially",
+                "non-belies"
             ).random()
             event.reply(MessageCreate {
                 content += "You asked: *${question.replace("*", "\\*")}*"

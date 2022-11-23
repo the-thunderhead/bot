@@ -28,9 +28,11 @@ object Reminders {
         Timer("ReminderScheduler").scheduleAtFixedRate(timerTask {
             val connection: Connection = DriverManager.getConnection(DATABASE)
             val statement: Statement = connection.createStatement()
-            statement.queryTimeout = (CYCLE_LENGTH / 2000).toInt() // make sure we are not waiting longer than half a cycle
+            statement.queryTimeout =
+                (CYCLE_LENGTH / 2000).toInt() // make sure we are not waiting longer than half a cycle
             val now = Date.from(Instant.now()).time
-            val result = statement.executeQuery("SELECT created, scheduled, id, reminder FROM Reminders WHERE scheduled < ${now + CYCLE_LENGTH}")
+            val result =
+                statement.executeQuery("SELECT created, scheduled, id, reminder FROM Reminders WHERE scheduled < ${now + CYCLE_LENGTH}")
             while (result.next()) {
                 val created = result.getDate("created").time
                 val scheduled = result.getDate("scheduled").time

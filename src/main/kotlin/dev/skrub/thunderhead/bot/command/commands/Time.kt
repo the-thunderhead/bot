@@ -25,9 +25,11 @@ class Time : Command(
         val location = event.getOption<String>("location")!!
         try {
             val response = JSONObject(
-                Utils.request("https://geocoding-api.open-meteo.com/v1/search?name=${
-                    location.replace(" ", "+").replace("&", "")
-                }")
+                Utils.request(
+                    "https://geocoding-api.open-meteo.com/v1/search?name=${
+                        location.replace(" ", "+").replace("&", "")
+                    }"
+                )
             )
 
             if (!response.has("results")) {
@@ -35,7 +37,7 @@ class Time : Command(
             } else {
                 val result = response.getJSONArray("results").getJSONObject(0)
                 val date = ZonedDateTime.now(ZoneId.of(result.getString("timezone"))).toLocalDateTime()
-                // TODO: debating adding a footer with the chinese calendar year like in scythe
+                // debating adding a footer with the chinese calendar year like in scythe
                 event.reply(MessageCreate {
                     embeds += Embed {
                         title = "${result.getString("name")}, ${result.getString("admin1")}"

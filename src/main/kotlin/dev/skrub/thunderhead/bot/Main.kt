@@ -12,8 +12,6 @@ import dev.skrub.thunderhead.bot.util.Reminders
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.requests.GatewayIntent
 import org.reflections.Reflections
-import java.util.Timer
-import kotlin.concurrent.timerTask
 
 fun main() {
     val jda = light(System.getenv("TOKEN")!!, enableCoroutines = true) {

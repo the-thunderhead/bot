@@ -32,16 +32,26 @@ class Daily : Command(
             val balance = Economy.getBalance(event.user.id, statement)
             event.reply(MessageCreate {
                 embeds += Embed {
-                    description = "You have received $daily ${Emote.currency} as part of your BIG (Basic Income Guarantee). Your balance is now $balance ${Emote.currency}"
+                    description =
+                        "You have received $daily ${Emote.currency} as part of your BIG (Basic Income Guarantee). Your balance is now $balance ${Emote.currency}"
                     color = Color.discord
                 }
             }).queue()
         } else {
-            val ms =  (1000 * 60 * 60 * 24) - (Date.from(Instant.now()).time - Economy.getDate(event.user.id, "daily", statement))
-            val remaining = String.format("%d:%02d", TimeUnit.MILLISECONDS.toHours(ms), TimeUnit.MILLISECONDS.toMinutes(ms) % TimeUnit.HOURS.toMinutes(1))
+            val ms = (1000 * 60 * 60 * 24) - (Date.from(Instant.now()).time - Economy.getDate(
+                event.user.id,
+                "daily",
+                statement
+            ))
+            val remaining = String.format(
+                "%d:%02d",
+                TimeUnit.MILLISECONDS.toHours(ms),
+                TimeUnit.MILLISECONDS.toMinutes(ms) % TimeUnit.HOURS.toMinutes(1)
+            )
             event.reply(MessageCreate {
                 embeds += Embed {
-                    description = "I’m sorry, you have already collected your BIG (Basic Income Guarantee) for today. You may collect it again in `$remaining` ${Emote.time}"
+                    description =
+                        "I’m sorry, you have already collected your BIG (Basic Income Guarantee) for today. You may collect it again in `$remaining` ${Emote.time}"
                     color = Color.discord
                 }
             }).queue()

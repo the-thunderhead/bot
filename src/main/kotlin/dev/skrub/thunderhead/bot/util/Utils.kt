@@ -5,7 +5,7 @@ import java.net.URL
 import java.util.*
 
 object Utils {
-    fun request(url: String) : String {
+    fun request(url: String): String {
         val url = URL(url)
         val connection = url.openConnection() as HttpURLConnection
         connection.requestMethod = "GET"
@@ -22,6 +22,5 @@ object Utils {
         }
 
         throw Exception("URL responded with StatusCode $responseCode instead of 200")
-
     }
 }

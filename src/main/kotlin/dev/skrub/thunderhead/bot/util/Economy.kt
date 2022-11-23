@@ -1,7 +1,6 @@
 package dev.skrub.thunderhead.bot.util
 
 import net.dv8tion.jda.api.JDA
-import net.dv8tion.jda.api.entities.User
 import okhttp3.internal.toImmutableList
 import java.sql.Connection
 import java.sql.DriverManager
@@ -27,7 +26,7 @@ object Economy {
         setBalance(id, getBalance(id, statement) + amount, statement)
     }
 
-    fun setBalance(id: String, amount: Int, statement: Statement) : Int{
+    fun setBalance(id: String, amount: Int, statement: Statement): Int {
         val now = Date.from(Instant.now()).time
         if (!exists(id, statement)) {
             statement.executeUpdate("INSERT INTO Economy VALUES('$id', $amount, 0, 0, $now, $now)")
@@ -38,7 +37,7 @@ object Economy {
     }
 
     fun getBalance(id: String, statement: Statement): Int {
-        return if (exists(id, statement))  {
+        return if (exists(id, statement)) {
             statement.executeQuery("SELECT balance FROM Economy WHERE id='$id'").getInt(1)
         } else {
             setBalance(id, DEFAULT_BALANCE, statement)
@@ -49,10 +48,12 @@ object Economy {
         val result = statement.executeQuery("SELECT id, balance FROM Economy ORDER BY balance DESC LIMIT $amount")
         val values: MutableList<Pair<String, Int>> = mutableListOf()
         while (result.next()) {
-            values.add(Pair(
-                jda.retrieveUserById(result.getString("id")).complete().name,
-                result.getInt("balance")
-            ))
+            values.add(
+                Pair(
+                    jda.retrieveUserById(result.getString("id")).complete().name,
+                    result.getInt("balance")
+                )
+            )
         }
         return values.toImmutableList()
     }
