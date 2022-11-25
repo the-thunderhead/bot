@@ -6,9 +6,9 @@ plugins {
 }
 
 application {
-    mainClass.set("dev.skrub.thunderhead.bot.MainKt")
+    mainClass.set("info.vivime.thunderhead.MainKt")
 }
-group = "dev.skrub.thunderhead"
+group = "info.vivime"
 version = "1.0.0"
 
 repositories {

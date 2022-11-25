@@ -1,4 +1,4 @@
-package dev.skrub.thunderhead.bot.info
+package info.vivime.thunderhead.info
 
 object Emote {
     val thunderhead = "<:thunderhead:870715821134065714>"

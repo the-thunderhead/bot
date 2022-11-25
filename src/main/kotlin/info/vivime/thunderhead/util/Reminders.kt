@@ -1,9 +1,9 @@
-package dev.skrub.thunderhead.bot.util
+package info.vivime.thunderhead.util
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.MessageCreate
-import dev.skrub.thunderhead.bot.info.Color
-import dev.skrub.thunderhead.bot.info.Emote
+import info.vivime.thunderhead.info.Color
+import info.vivime.thunderhead.info.Emote
 import net.dv8tion.jda.api.JDA
 import java.sql.Connection
 import java.sql.DriverManager

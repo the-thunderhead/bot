@@ -1,4 +1,4 @@
-package dev.skrub.thunderhead.bot.util
+package info.vivime.thunderhead.util
 
 class Config(
     val description: String,

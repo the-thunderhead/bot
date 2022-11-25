@@ -1,7 +1,7 @@
-package dev.skrub.thunderhead.bot.command.commands
+package info.vivime.thunderhead.command.commands
 
-import dev.skrub.thunderhead.bot.command.Command
-import dev.skrub.thunderhead.bot.command.Type
+import info.vivime.thunderhead.command.Command
+import info.vivime.thunderhead.command.Type
 import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions
 

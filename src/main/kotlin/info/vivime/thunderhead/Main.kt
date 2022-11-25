@@ -1,4 +1,4 @@
-package dev.skrub.thunderhead.bot
+package info.vivime.thunderhead
 
 import dev.minn.jda.ktx.events.onCommand
 import dev.minn.jda.ktx.interactions.commands.restrict
@@ -6,9 +6,9 @@ import dev.minn.jda.ktx.interactions.commands.slash
 import dev.minn.jda.ktx.interactions.commands.updateCommands
 import dev.minn.jda.ktx.jdabuilder.intents
 import dev.minn.jda.ktx.jdabuilder.light
-import dev.skrub.thunderhead.bot.command.Command
-import dev.skrub.thunderhead.bot.util.Economy
-import dev.skrub.thunderhead.bot.util.Reminders
+import info.vivime.thunderhead.command.Command
+import info.vivime.thunderhead.util.Economy
+import info.vivime.thunderhead.util.Reminders
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.requests.GatewayIntent
 import org.reflections.Reflections
@@ -26,7 +26,7 @@ fun main() {
 }
 
 private fun registerCommands(jda: JDA) {
-    val reflections = Reflections("dev.skrub.thunderhead.bot.command.commands")
+    val reflections = Reflections("info.vivime.thunderhead.command.commands")
     jda.updateCommands {
         for (command in reflections.getSubTypesOf(Command::class.java)) {
             val instance = command.getConstructor().newInstance()

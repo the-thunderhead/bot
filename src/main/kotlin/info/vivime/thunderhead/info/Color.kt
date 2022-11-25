@@ -1,4 +1,4 @@
-package dev.skrub.thunderhead.bot.info
+package info.vivime.thunderhead.info
 
 object Color {
     val discord = 0x36393E // Discord Dark Theme Colour

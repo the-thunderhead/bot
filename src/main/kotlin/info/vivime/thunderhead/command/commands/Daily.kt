@@ -1,13 +1,13 @@
-package dev.skrub.thunderhead.bot.command.commands
+package info.vivime.thunderhead.command.commands
 
 
 import dev.minn.jda.ktx.messages.Embed
 import dev.minn.jda.ktx.messages.MessageCreate
-import dev.skrub.thunderhead.bot.command.Command
-import dev.skrub.thunderhead.bot.command.Type
-import dev.skrub.thunderhead.bot.info.Color
-import dev.skrub.thunderhead.bot.info.Emote
-import dev.skrub.thunderhead.bot.util.Economy
+import info.vivime.thunderhead.command.Command
+import info.vivime.thunderhead.command.Type
+import info.vivime.thunderhead.info.Color
+import info.vivime.thunderhead.info.Emote
+import info.vivime.thunderhead.util.Economy
 import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions
 import java.sql.Connection

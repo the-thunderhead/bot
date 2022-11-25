@@ -1,4 +1,4 @@
-package dev.skrub.thunderhead.bot.util
+package info.vivime.thunderhead.util
 
 import net.dv8tion.jda.api.JDA
 import okhttp3.internal.toImmutableList

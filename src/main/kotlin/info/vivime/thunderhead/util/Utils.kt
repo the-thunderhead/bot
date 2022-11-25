@@ -1,4 +1,4 @@
-package dev.skrub.thunderhead.bot.util
+package info.vivime.thunderhead.util
 
 import java.net.HttpURLConnection
 import java.net.URL
