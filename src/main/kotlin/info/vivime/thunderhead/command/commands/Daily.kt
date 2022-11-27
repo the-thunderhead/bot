@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit
 
 class Daily : Command(
     name = "daily",
-    description = "Your daily BIG (Basic Income Guarantee",
+    description = "Your daily BIG (Basic Income Guarantee)",
     restrictions = Pair(false, DefaultMemberPermissions.ENABLED),
     type = Type.ECONOMY
 ) {

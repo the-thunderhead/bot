@@ -1,0 +1,29 @@
+name: Thunderhead Jar Build
+
+on:
+    push:
+        branches: ["main"]
+    pull_request:
+        branches: ["main"]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+
+            # Configure Java Version
+            - name: Setup JDK 17
+              uses: actions/setup-java@v1
+              with:
+                java-version: 17
+
+            # Build
+            - name: Build with gradle
+              run: ./gradlew build
+
+            # Upload to artifacts
+            - uses: actions/upload-artifact@v2
+              with:
+                  name: Thunderhead Artifacts
+                  path: "./build/libs/*.jar"

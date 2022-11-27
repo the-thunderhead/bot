@@ -60,7 +60,7 @@ class Ask : Command(
             }).queue()
 
         } catch (e: Exception) {
-            val answer = if (question.contains("scythe")) "warning" else listOf(
+            val answer = if (question.contains("scythe", true)) "warning" else listOf(
                 "yes-986",
                 "yes-never",
                 "yes-truly",
