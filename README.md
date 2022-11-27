@@ -2,8 +2,11 @@
 
 > The thunderhead cannot intervene in affairs of the Scythedom. All it can do is watch; with an unblinking eye.
 
+## Setup
+Make sure to set the bot's token as the `TOKEN` environment variable.
+
 ## Build
-Run `gradlew shadowJar`
+Run `gradlew build` 
 
 ## Acknowledgements
 - [JDA KTX](https://github.com/MinnDevelopment/jda-ktx) — Kotlin extensions for JDA
