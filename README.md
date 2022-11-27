@@ -1,4 +1,4 @@
-![The Thunderhead](https://raw.githubusercontent.com/the-thunderhead/bot/main/art/logos/logo_project.png)
+![The Thunderhead](./misc/logos/logo_project.png)
 
 > The thunderhead cannot intervene in affairs of the Scythedom. All it can do is watch; with an unblinking eye.
 
