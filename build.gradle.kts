@@ -1,7 +1,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     kotlin("jvm") version "1.7.20"
+    id("com.github.johnrengelman.shadow") version "7.0.0"
     application
 }
 
@@ -32,10 +34,21 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "17"
+tasks {
+    named<ShadowJar>("shadowJar") {
+        archiveBaseName.set("shadow")
+        mergeServiceFiles()
+        manifest {
+            attributes(mapOf("Main-Class" to "info.vivime.thunderhead.MainKt"))
+        }
+    }
+    build {
+        dependsOn(shadowJar)
+    }
+    test {
+        useJUnitPlatform()
+    }
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = "17"
+    }
 }
