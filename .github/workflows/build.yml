@@ -14,10 +14,10 @@ jobs:
 
             # Configure Java Version
             - name: Setup JDK 17
-              uses: actions/setup-java@v2
+              uses: actions/setup-java@v3
               with:
-                distribution: 'oracle'
                 java-version: '17'
+                distribution: 'oracle'
 
             # Build
             - name: Build with gradle
