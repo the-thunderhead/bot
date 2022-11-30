@@ -45,7 +45,7 @@ class Weather : Command(
                                 "&hourly=weathercode,temperature_2m,apparent_temperature,precipitation,visibility,windspeed_10m" +
                                 "&daily=sunrise,sunset" +
                                 "&temperature_unit=fahrenheit&precipitation_unit=inch&windspeed_unit=mph" + // USA USA USA
-                                "&timeformat=unixtime&timezone=auto&past_days=1"
+                                "&timeformat=unixtime&timezone=auto&past_days=0"
                     )
                 )
                 val getTimeFromDate = SimpleDateFormat("HH:mm")
@@ -89,7 +89,7 @@ class Weather : Command(
                         }
                         thumbnail = String.format(
                             "https://openweathermap.org/img/wn/%02d${
-                                if (Date.from(Instant.now()).time / 1000 in (sunrise..sunset)) {
+                                if (Date.from(Instant.now()).time / 1000 in (sunrise..sunset))  {
                                     "d"
                                 } else {
                                     "n"
