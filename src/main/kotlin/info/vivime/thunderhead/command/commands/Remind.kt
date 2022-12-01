@@ -22,7 +22,7 @@ class Remind : Command(
         val time = event.getOption<String>("time")!!
         val reminder = event.getOption<String>("reminder")!!
 
-        if (Regex("^(\\d+)[smhdwy]\$").matches(time)) {
+        if (Regex("^(\\d*\\.?\\d+)[smhdwy]\$").matches(time)) {
             val unit = when (time.last()) {
                 's' -> 1
                 'm' -> 60
@@ -35,9 +35,10 @@ class Remind : Command(
             val connection: Connection = DriverManager.getConnection(Reminders.DATABASE)
             val statement: Statement = connection.createStatement()
             statement.queryTimeout = 30
+            println(time.filter { it.isDigit() || it == '.' })
             Reminders.addReminder(
                 event.user.id,
-                unit * ("0${time.filter { it.isDigit() }}").toInt() * 1000L,
+                (unit * ("0${time.filter { it.isDigit() || it == '.' }}").toFloat() * 1000).toLong(),
                 reminder,
                 statement
             )
