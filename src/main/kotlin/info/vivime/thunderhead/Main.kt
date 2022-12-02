@@ -10,6 +10,7 @@ import info.vivime.thunderhead.command.Command
 import info.vivime.thunderhead.info.Activities
 import info.vivime.thunderhead.util.Economy
 import info.vivime.thunderhead.util.Reminders
+import info.vivime.thunderhead.util.Utils
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.requests.GatewayIntent
@@ -18,7 +19,7 @@ import java.util.*
 import kotlin.concurrent.timerTask
 
 fun main() {
-    val jda = light(System.getenv("TOKEN")!!, enableCoroutines = true) {
+    val jda = light(Utils.getValueFromDotenv("TOKEN"), enableCoroutines = true) {
         intents += listOf(GatewayIntent.GUILD_MEMBERS)
     }
 
@@ -37,8 +38,8 @@ fun main() {
     // change what the bot is listening to/watching every so often
     Timer("ReminderScheduler").scheduleAtFixedRate(
         timerTask {
-            val activity = Activities.LIST.random();
-            jda.presence.activity = Activity.of(activity.first, activity.second);
+            val activity = Activities.LIST.random()
+            jda.presence.activity = Activity.of(activity.first, activity.second)
         }, 0, Activities.CYCLE_LENGTH) // ten seconds
 }
 

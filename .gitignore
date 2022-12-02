@@ -1,6 +1,7 @@
 # Thunderhead Specific Stuff
 *.db
 config.yaml
+.env
 
 # Some folders
 .gradle

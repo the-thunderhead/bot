@@ -1,5 +1,6 @@
 package info.vivime.thunderhead.util
 
+import java.io.File
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.*
@@ -22,5 +23,12 @@ object Utils {
         }
 
         throw Exception("URL responded with StatusCode $responseCode instead of 200")
+    }
+
+    fun getValueFromDotenv(variable: String) : String {
+        // might there be a better way to do this?
+        val envFile = File(".env").readText(Charsets.UTF_8)
+        val line = envFile.lines().filter { it.startsWith(variable)}[0]
+        return line.split("=")[1]
     }
 }
