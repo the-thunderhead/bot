@@ -25,12 +25,12 @@ dependencies {
     implementation("net.dv8tion:JDA:5.0.0-alpha.22") {
         exclude(module="opus-java")
     }
-    implementation("com.github.minndevelopment:jda-ktx:863470e")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+    implementation("com.github.minndevelopment:jda-ktx:17eb77a")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation("org.json:json:20220924")
     implementation("org.reflections:reflections:0.10.2")
     implementation("com.github.Redempt:Crunch:1.1.2")
-    implementation("org.xerial:sqlite-jdbc:3.39.4.0")
+    implementation("org.xerial:sqlite-jdbc:3.40.4.0")
     implementation(kotlin("stdlib-jdk8"))
 }
 
