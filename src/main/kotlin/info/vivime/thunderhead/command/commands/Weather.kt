@@ -121,6 +121,6 @@ class Weather : Command(
     }
 
     override fun addOptions(slashCommandData: SlashCommandData) {
-        slashCommandData.option<String>("location", "Where do you want to check the time?", true)
+        slashCommandData.option<String>("location", "Where do you want to check the weather?", true)
     }
 }

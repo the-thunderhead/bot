@@ -40,7 +40,7 @@ fun main() {
         timerTask {
             val activity = Activities.LIST.random()
             jda.presence.activity = Activity.of(activity.first, activity.second)
-        }, 0, Activities.CYCLE_LENGTH) // ten seconds
+        }, 0, Activities.CYCLE_LENGTH)
 }
 
 private fun registerCommands(jda: JDA) {
